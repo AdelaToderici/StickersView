@@ -83,8 +83,12 @@
 		029B416C202B8E7800A1D86E /* StickersView */ = {
 			isa = PBXGroup;
 			children = (
-				029B4192202B901200A1D86E /* Helper */,
 				029B4184202B8EC800A1D86E /* StickersView.swift */,
+				029B4188202B8FF300A1D86E /* CGFloat-Extensions.swift */,
+				029B4189202B8FF300A1D86E /* CGPoint-Extension.swift */,
+				029B418B202B8FF300A1D86E /* CGRect-Extension.swift */,
+				029B418A202B8FF300A1D86E /* CompareT.swift */,
+				029B418C202B8FF300A1D86E /* FaceImageProcessing.swift */,
 				029B416D202B8E7800A1D86E /* StickersView.h */,
 				029B416E202B8E7800A1D86E /* Info.plist */,
 			);
@@ -98,18 +102,6 @@
 				029B417A202B8E7800A1D86E /* Info.plist */,
 			);
 			path = StickersViewTests;
-			sourceTree = "<group>";
-		};
-		029B4192202B901200A1D86E /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				029B4188202B8FF300A1D86E /* CGFloat-Extensions.swift */,
-				029B4189202B8FF300A1D86E /* CGPoint-Extension.swift */,
-				029B418B202B8FF300A1D86E /* CGRect-Extension.swift */,
-				029B418A202B8FF300A1D86E /* CompareT.swift */,
-				029B418C202B8FF300A1D86E /* FaceImageProcessing.swift */,
-			);
-			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -7,12 +7,10 @@ Pod::Spec.new do |s|
   s.homepage     = 'https://github.com/AdelaToderici/StickersView'
   s.description  = 'StickersView is a customizable image processing for face recognition that can be used in iOS app.'
   s.author       = { 'Isabela Adela Toderici' => 'adeisa90@yahoo.com' }
-  s.source       = { :git => 'https://github.com/AdelaToderici/StickersView.git', :tag => '1.0.0' }
-
+  s.source       = { :path => '.' }
   s.platform = :ios, '11.0'
 
-  s.source_files  = "StickersView/*.{h,m, swift}"
-
+  s.source_files = "StickersView", "StickersView/**/*.{h,m, swift}"
   s.requires_arc = true
 
 end
