@@ -9,9 +9,9 @@ Pod::Spec.new do |s|
   s.author       = { 'Isabela Adela Toderici' => 'adeisa90@yahoo.com' }
   s.source       = { :git => 'https://github.com/AdelaToderici/StickersView.git', :tag => '1.0.0' }
 
-  s.ios.deployment_target = '11.0'
+  s.platform = :ios, '11.0'
 
-  s.source_files  = "StickersView", "StickersView/**/*.{h,m,swift}"
+  s.source_files  = "StickersView/*.{h,m, swift}"
 
   s.requires_arc = true
 
