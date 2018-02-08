@@ -10,7 +10,7 @@ import Foundation
 import Vision
 import UIKit
 
-class FaceDetectionProcessing: NSObject {
+public class FaceDetectionProcessing: NSObject {
     
     weak var imageView: UIImageView!
     var stickerViews:[StickersView] = []
@@ -24,7 +24,12 @@ class FaceDetectionProcessing: NSObject {
         }
     }
     
-    func processImage(imageView: UIImageView) {
+    public init(imageView: UIImageView) {
+        self.imageView = imageView
+        super.init()
+    }
+    
+    public func processImage() {
         
         if imageView.subviews.count > 0 {
             imageView.subviews.forEach({ $0.removeFromSuperview() })

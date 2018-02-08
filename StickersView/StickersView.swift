@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StickersView: UIView {
+public class StickersView: UIView {
     
     var imageView:UIImageView!
     var angle: CGFloat?
@@ -32,7 +32,7 @@ class StickersView: UIView {
         self.rotateView()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -164,7 +164,7 @@ class StickersView: UIView {
 
 extension StickersView: UIGestureRecognizerDelegate {
     
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
     
