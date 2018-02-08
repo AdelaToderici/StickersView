@@ -213,7 +213,7 @@ class FaceImageProcessing: UIImage {
     
     func calculateLeftRightPoints(faceLeftPoint: CGPoint, faceRightPoint: CGPoint, faceRect: CGRect) {
         
-        let faceYDist = (CompareT().MAX(a: faceLeftPoint.y, b: faceRightPoint.y) - CompareT().MIN(a: faceLeftPoint.y, b: faceRightPoint.y))/2
+        let faceYDist = (MAX(a: faceLeftPoint.y, b: faceRightPoint.y) - MIN(a: faceLeftPoint.y, b: faceRightPoint.y))/2
         var yLeftPos: CGFloat = 0.0
         var yRightPos: CGFloat = 0.0
         var xLeftPos: CGFloat = 0.0
@@ -251,7 +251,7 @@ class FaceImageProcessing: UIImage {
     
     func calculateTopMidPoint(startPoint: CGPoint, endPoint: CGPoint) -> CGPoint {
         let distance = (endPoint.y + startPoint.y)/2
-        let topXDist = (CompareT().MAX(a: startPoint.x, b: endPoint.x) - CompareT().MIN(a: startPoint.x, b: endPoint.x))/2
+        let topXDist = (MAX(a: startPoint.x, b: endPoint.x) - MIN(a: startPoint.x, b: endPoint.x))/2
         var xPos:CGFloat = 0.0
         
         if startPoint.x < endPoint.x - 0.02 {
@@ -263,5 +263,19 @@ class FaceImageProcessing: UIImage {
         }
         
         return CGPoint(x: xPos, y: startPoint.y + distance)
+    }
+    
+    func MIN <T : Comparable> (a: T, b: T) -> T {
+        if a > b {
+            return b
+        }
+        return a
+    }
+    
+    func MAX <T : Comparable> (a: T, b: T) -> T {
+        if a > b {
+            return a
+        }
+        return b
     }
 }

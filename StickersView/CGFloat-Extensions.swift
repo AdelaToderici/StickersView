@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-extension CGFloat {
+extension StickersView {
     
-    static func calculateAngle(leftPoint: CGPoint, rightPoint: CGPoint) -> CGFloat {
+    func calculateAngle(leftPoint: CGPoint, rightPoint: CGPoint) -> CGFloat {
         // https://math.stackexchange.com/questions/1596513/find-the-bearing-angle-between-two-points-in-a-2d-space
         var theta:CGFloat = 0.0
         if (leftPoint.y > rightPoint.y) {

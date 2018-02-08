@@ -19,7 +19,7 @@ public class StickersView: UIView {
     public var stickerIsTapped: Bool? = false
     
     init(leftPoint: CGPoint, rightPoint: CGPoint, parentImageView: UIImageView) {
-        super.init(frame: CGRect.calculateViewFrame(leftPoint: leftPoint, rightPoint: rightPoint, parentImageView: parentImageView))
+        super.init(frame: calculateViewFrame(leftPoint: leftPoint, rightPoint: rightPoint, parentImageView: parentImageView))
         
         self.basicFrame = frame
         self.leftPoint = leftPoint
@@ -27,7 +27,7 @@ public class StickersView: UIView {
         self.isUserInteractionEnabled = true
         self.backgroundColor = UIColor.red.withAlphaComponent(0.5)
         self.setupGestures()
-        self.angle = CGFloat.calculateAngle(leftPoint: leftPoint, rightPoint: rightPoint)
+        self.angle = calculateAngle(leftPoint: leftPoint, rightPoint: rightPoint)
         self.imageView = createImageView(size: frame.size)
         self.rotateView()
     }
@@ -46,7 +46,7 @@ public class StickersView: UIView {
         
         stickerView.transform = CGAffineTransform.identity
         
-        stickerView.frame = CGRect.calculateRescaledFrame(stickerView: stickerView,
+        stickerView.frame = calculateRescaledFrame(stickerView: stickerView,
                                                           aPoint: aPoint,
                                                           bPoint: bPoint,
                                                           stickerImageWidth: stickerImageWidth,
@@ -55,7 +55,7 @@ public class StickersView: UIView {
         stickerView.imageView.frame.size = CGSize(width: stickerView.frame.size.width ,
                                                   height: stickerView.frame.size.height)
         
-        stickerView.layer.position = CGPoint.calculateViewPosition(view: stickerView)
+        stickerView.layer.position = calculateViewPosition(view: stickerView)
         stickerView.transform = CGAffineTransform(rotationAngle: stickerView.angle!)
         
         drawBrowline(stickerView: stickerView,
@@ -68,8 +68,8 @@ public class StickersView: UIView {
     // MARK : Private Methods
     
     private func rotateView() {
-        let anchor = CGPoint.calculateAnchorPoint(angle: angle!, distance: self.frame.size.width)
-        self.anchorsDist = (CompareT().MAX(a: anchor.x, b: anchor.y) - CompareT().MIN(a: anchor.x, b: anchor.y)) / 1.8
+        let anchor = calculateAnchorPoint(angle: angle!, distance: self.frame.size.width)
+        self.anchorsDist = (MAX(a: anchor.x, b: anchor.y) - MIN(a: anchor.x, b: anchor.y)) / 1.8
         
         let xPos = (leftPoint!.y < rightPoint!.y) ?
             self.frame.origin.x + (self.bounds.size.width / 2) - self.anchorsDist! :
@@ -129,6 +129,20 @@ public class StickersView: UIView {
         
         let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(StickersView.handleRotation(_:)))
         self.addGestureRecognizer(rotationGesture)
+    }
+    
+    func MIN <T : Comparable> (a: T, b: T) -> T {
+        if a > b {
+            return b
+        }
+        return a
+    }
+    
+    func MAX <T : Comparable> (a: T, b: T) -> T {
+        if a > b {
+            return a
+        }
+        return b
     }
     
     // MARK: Actions

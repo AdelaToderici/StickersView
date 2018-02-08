@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-extension CGRect {
+extension StickersView {
     
-    static func calculateRectOfImageInImageView(imageView: UIImageView) -> CGRect {
+    func calculateRectOfImageInImageView(imageView: UIImageView) -> CGRect {
         let imageViewSize = imageView.frame.size
         let imgSize = imageView.image?.size
         
@@ -35,7 +35,7 @@ extension CGRect {
         return imageRect
     }
     
-    static func calculateViewFrame(leftPoint: CGPoint, rightPoint: CGPoint, parentImageView: UIImageView) -> CGRect {
+    func calculateViewFrame(leftPoint: CGPoint, rightPoint: CGPoint, parentImageView: UIImageView) -> CGRect {
         
         let pixelFrame = self.calculateViewPixelFrame(topLeftPoint: leftPoint, topRightPoint: rightPoint)
         let imageFrame = self.calculateRectOfImageInImageView(imageView: parentImageView)
@@ -50,7 +50,7 @@ extension CGRect {
         return CGRect(x: x, y: y, width: width, height: height)
     }
     
-    static func calculateViewPixelFrame(topLeftPoint: CGPoint, topRightPoint: CGPoint) -> CGRect {
+    func calculateViewPixelFrame(topLeftPoint: CGPoint, topRightPoint: CGPoint) -> CGRect {
         let x:CGFloat = topLeftPoint.x
         let y:CGFloat = (topLeftPoint.y > topRightPoint.y) ? topLeftPoint.y : topRightPoint.y
         let width = topRightPoint.x - topLeftPoint.x
@@ -58,7 +58,7 @@ extension CGRect {
         return CGRect(x: x, y: y, width: width, height: width)
     }
     
-    static func calculateRescaledFrame(stickerView:StickersView,
+    func calculateRescaledFrame(stickerView:StickersView,
                                        aPoint: CGPoint,
                                        bPoint: CGPoint,
                                        stickerImageWidth: CGFloat,

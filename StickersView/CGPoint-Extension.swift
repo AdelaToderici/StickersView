@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-extension CGPoint {
+extension StickersView {
 
-    static func calculateAnchorPoint(angle: CGFloat, distance: CGFloat) -> CGPoint {
+    func calculateAnchorPoint(angle: CGFloat, distance: CGFloat) -> CGPoint {
 
         let i:CGFloat = 0.707106 // (= √2 / 2)
         let x:CGFloat = cos(angle + (.pi / 4)) * (distance * i)
@@ -26,7 +26,7 @@ extension CGPoint {
         }
     }
     
-    static func calculateViewPosition(view: StickersView) -> CGPoint {
+    func calculateViewPosition(view: StickersView) -> CGPoint {
         let dist = ((view.frame.size.width * view.anchorsDist!) / view.basicFrame!.size.width) / (view.frame.size.width / view.basicFrame!.size.width)
         
         let basicX = view.basicFrame!.origin.x
@@ -35,15 +35,15 @@ extension CGPoint {
         var yPos = view.frame.origin.y
         
         if (basicX < 0 && xPos < 0) {
-            xPos = abs(CompareT().MIN(a: basicX, b: xPos) / CompareT().MAX(a: basicX, b: xPos))
+            xPos = abs(MIN(a: basicX, b: xPos) / MAX(a: basicX, b: xPos))
         } else {
-            xPos = abs(CompareT().MAX(a: basicX, b: xPos) / CompareT().MIN(a: basicX, b: xPos))
+            xPos = abs(MAX(a: basicX, b: xPos) / MIN(a: basicX, b: xPos))
         }
         
         if (basicY < 0 && yPos < 0) {
-            yPos = abs(CompareT().MIN(a: basicY, b: yPos) / CompareT().MAX(a: basicY, b: yPos))
+            yPos = abs(MIN(a: basicY, b: yPos) / MAX(a: basicY, b: yPos))
         } else {
-            yPos = abs(CompareT().MAX(a: basicY, b: yPos) / CompareT().MIN(a: basicY, b: yPos))
+            yPos = abs(MAX(a: basicY, b: yPos) / MIN(a: basicY, b: yPos))
         }
         
         let x = (view.leftPoint!.y <  view.rightPoint!.y) ?

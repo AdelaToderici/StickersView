@@ -13,7 +13,6 @@
 		029B4186202B8EC800A1D86E /* StickersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B4184202B8EC800A1D86E /* StickersView.swift */; };
 		029B418D202B8FF300A1D86E /* CGFloat-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B4188202B8FF300A1D86E /* CGFloat-Extensions.swift */; };
 		029B418E202B8FF300A1D86E /* CGPoint-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B4189202B8FF300A1D86E /* CGPoint-Extension.swift */; };
-		029B418F202B8FF300A1D86E /* CompareT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B418A202B8FF300A1D86E /* CompareT.swift */; };
 		029B4190202B8FF300A1D86E /* CGRect-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B418B202B8FF300A1D86E /* CGRect-Extension.swift */; };
 		029B4191202B8FF300A1D86E /* FaceImageProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B418C202B8FF300A1D86E /* FaceImageProcessing.swift */; };
 		029B4195202BAA3F00A1D86E /* FaceDetectionProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029B4194202BAA3F00A1D86E /* FaceDetectionProcessing.swift */; };
@@ -39,7 +38,6 @@
 		029B4184202B8EC800A1D86E /* StickersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StickersView.swift; sourceTree = "<group>"; };
 		029B4188202B8FF300A1D86E /* CGFloat-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGFloat-Extensions.swift"; sourceTree = "<group>"; };
 		029B4189202B8FF300A1D86E /* CGPoint-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint-Extension.swift"; sourceTree = "<group>"; };
-		029B418A202B8FF300A1D86E /* CompareT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareT.swift; sourceTree = "<group>"; };
 		029B418B202B8FF300A1D86E /* CGRect-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGRect-Extension.swift"; sourceTree = "<group>"; };
 		029B418C202B8FF300A1D86E /* FaceImageProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FaceImageProcessing.swift; sourceTree = "<group>"; };
 		029B4194202BAA3F00A1D86E /* FaceDetectionProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionProcessing.swift; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 				029B4188202B8FF300A1D86E /* CGFloat-Extensions.swift */,
 				029B4189202B8FF300A1D86E /* CGPoint-Extension.swift */,
 				029B418B202B8FF300A1D86E /* CGRect-Extension.swift */,
-				029B418A202B8FF300A1D86E /* CompareT.swift */,
 				029B418C202B8FF300A1D86E /* FaceImageProcessing.swift */,
 				029B4194202BAA3F00A1D86E /* FaceDetectionProcessing.swift */,
 				029B416D202B8E7800A1D86E /* StickersView.h */,
@@ -218,7 +215,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				029B418F202B8FF300A1D86E /* CompareT.swift in Sources */,
 				029B418E202B8FF300A1D86E /* CGPoint-Extension.swift in Sources */,
 				029B418D202B8FF300A1D86E /* CGFloat-Extensions.swift in Sources */,
 				029B4195202BAA3F00A1D86E /* FaceDetectionProcessing.swift in Sources */,
