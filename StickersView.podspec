@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source       = { :path => '.' }
   s.platform = :ios, '11.0'
 
-  s.source_files = "StickersView", "StickersView/**/*.{h,m, swift}, "CGFloat-Extensions/**/*.swift", "CGPoint-Extensions/**/*.swift", "CGRect-Extensions/**/*.swift", "CompareT/**/*.swift", "FaceImageProcessing/**/*.swift"
+  s.source_files = "StickersView", "StickersView/**/*.{h,m, swift}"
   
   s.requires_arc = true
 
