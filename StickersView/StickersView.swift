@@ -10,13 +10,13 @@ import UIKit
 
 public class StickersView: UIView {
     
-    var imageView:UIImageView!
+    public var imageView:UIImageView!
     var angle: CGFloat?
     var basicFrame: CGRect?
     var leftPoint: CGPoint?
     var rightPoint: CGPoint?
     var anchorsDist: CGFloat?
-    var stickerIsTapped: Bool? = false
+    public var stickerIsTapped: Bool? = false
     
     init(leftPoint: CGPoint, rightPoint: CGPoint, parentImageView: UIImageView) {
         super.init(frame: CGRect.calculateViewFrame(leftPoint: leftPoint, rightPoint: rightPoint, parentImageView: parentImageView))
@@ -38,11 +38,11 @@ public class StickersView: UIView {
     
     // MARK : Public Methods
     
-    func changeSticker(stickerView:StickersView,
-                       aPoint: CGPoint,
-                       bPoint: CGPoint,
-                       stickerImageWidth: CGFloat,
-                       stickerImageHeight: CGFloat) {
+    public func changeSticker(stickerView:StickersView,
+                              aPoint: CGPoint,
+                              bPoint: CGPoint,
+                              stickerImageWidth: CGFloat,
+                              stickerImageHeight: CGFloat) {
         
         stickerView.transform = CGAffineTransform.identity
         
