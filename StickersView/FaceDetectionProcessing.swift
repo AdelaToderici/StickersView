@@ -12,8 +12,8 @@ import UIKit
 
 public class FaceDetectionProcessing: NSObject {
     
-    weak var imageView: UIImageView!
-    var stickerViews:[StickersView] = []
+    var imageView: UIImageView!
+    public var stickerViews:[StickersView] = []
     
     private var orientation:Int32 {
         switch imageView.image!.imageOrientation {
