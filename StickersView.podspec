@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author       = { 'Isabela Adela Toderici' => 'adeisa90@yahoo.com' }
   s.source       = { :git => 'https://github.com/AdelaToderici/StickersView.git', :tag => '1.1.0' }
 
-  s.platform = :ios, '11.0'
+  s.platform = :ios, '11.2'
 
   s.source_files  = "StickersView", "StickersView/**/*.{h,m,swift}"
 
