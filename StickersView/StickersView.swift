@@ -131,14 +131,157 @@ public class StickersView: UIView {
         self.addGestureRecognizer(rotationGesture)
     }
     
-    func MIN <T : Comparable> (a: T, b: T) -> T {
+    // MARK : CGRect
+    
+    private func calculateRectOfImageInImageView(imageView: UIImageView) -> CGRect {
+        let imageViewSize = imageView.frame.size
+        let imgSize = imageView.image?.size
+        
+        guard let imageSize = imgSize, imgSize != nil else {
+            return CGRect.zero
+        }
+        
+        let scaleWidth = imageViewSize.width / imageSize.width
+        let scaleHeight = imageViewSize.height / imageSize.height
+        let aspect = fmin(scaleWidth, scaleHeight)
+        
+        var imageRect = CGRect(x: 0, y: 0, width: imageSize.width * aspect, height: imageSize.height * aspect)
+        // Center image
+        imageRect.origin.x = (imageViewSize.width - imageRect.size.width) / 2
+        imageRect.origin.y = (imageViewSize.height - imageRect.size.height) / 2
+        
+        // Add imageView offset
+        imageRect.origin.x += imageView.frame.origin.x
+        imageRect.origin.y += imageView.frame.origin.y
+        
+        return imageRect
+    }
+    
+    private func calculateViewFrame(leftPoint: CGPoint, rightPoint: CGPoint, parentImageView: UIImageView) -> CGRect {
+        
+        let pixelFrame = self.calculateViewPixelFrame(topLeftPoint: leftPoint, topRightPoint: rightPoint)
+        let imageFrame = self.calculateRectOfImageInImageView(imageView: parentImageView)
+        
+        let ratio = parentImageView.image!.size.width/imageFrame.size.width
+        
+        let height = pixelFrame.size.height / ratio
+        let x = pixelFrame.origin.x / ratio
+        let y = ((parentImageView.image!.size.height - pixelFrame.origin.y) / ratio) + imageFrame.origin.y - parentImageView.frame.origin.y - height
+        let width = pixelFrame.size.width / ratio
+        
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+    
+    private func calculateViewPixelFrame(topLeftPoint: CGPoint, topRightPoint: CGPoint) -> CGRect {
+        let x:CGFloat = topLeftPoint.x
+        let y:CGFloat = (topLeftPoint.y > topRightPoint.y) ? topLeftPoint.y : topRightPoint.y
+        let width = topRightPoint.x - topLeftPoint.x
+        
+        return CGRect(x: x, y: y, width: width, height: width)
+    }
+    
+    private func calculateRescaledFrame(stickerView:StickersView,
+                                        aPoint: CGPoint,
+                                        bPoint: CGPoint,
+                                        stickerImageWidth: CGFloat,
+                                        stickerImageHeight: CGFloat) -> CGRect {
+        
+        let frame = stickerView.basicFrame!
+        let abDist = bPoint.x - aPoint.x
+        let aDist = (aPoint.x * frame.size.width)/abDist
+        let bDist = ((stickerImageWidth - bPoint.x) * frame.size.width)/abDist
+        
+        let rescaledFrame = CGRect(x: frame.origin.x - aDist,
+                                   y: frame.origin.y - aDist - bDist,
+                                   width: frame.size.width + aDist + bDist,
+                                   height: frame.size.height + aDist + bDist)
+        
+        let height = (rescaledFrame.size.height * (stickerImageHeight - aPoint.y)) / stickerImageHeight
+        
+        let resultFrame = CGRect(x: rescaledFrame.origin.x,
+                                 y: rescaledFrame.origin.y + height,
+                                 width: rescaledFrame.size.width,
+                                 height: rescaledFrame.size.height)
+        
+        stickerView.layer.position = CGPoint(x: resultFrame.origin.x + (resultFrame.size.width / 2),
+                                             y: resultFrame.origin.y + (resultFrame.size.height / 2))
+        
+        return resultFrame
+    }
+    
+    // MARK : Anchor point
+    
+    private func calculateAnchorPoint(angle: CGFloat, distance: CGFloat) -> CGPoint {
+        
+        let i:CGFloat = 0.707106 // (= √2 / 2)
+        let x:CGFloat = cos(angle + (.pi / 4)) * (distance * i)
+        let y:CGFloat = sin(angle + (.pi / 4)) * (distance * i)
+        
+        if angle == .pi {
+            return CGPoint(x: 0, y: 0)
+        } else if angle < 1 {
+            return CGPoint(x: x, y: y)
+        } else {
+            return CGPoint(x: y, y: x)
+        }
+    }
+    
+    private func calculateViewPosition(view: StickersView) -> CGPoint {
+        let dist = ((view.frame.size.width * view.anchorsDist!) / view.basicFrame!.size.width) / (view.frame.size.width / view.basicFrame!.size.width)
+        
+        let basicX = view.basicFrame!.origin.x
+        let basicY = view.basicFrame!.origin.y
+        var xPos = view.frame.origin.x
+        var yPos = view.frame.origin.y
+        
+        if (basicX < 0 && xPos < 0) {
+            xPos = abs(MIN(a: basicX, b: xPos) / MAX(a: basicX, b: xPos))
+        } else {
+            xPos = abs(MAX(a: basicX, b: xPos) / MIN(a: basicX, b: xPos))
+        }
+        
+        if (basicY < 0 && yPos < 0) {
+            yPos = abs(MIN(a: basicY, b: yPos) / MAX(a: basicY, b: yPos))
+        } else {
+            yPos = abs(MAX(a: basicY, b: yPos) / MIN(a: basicY, b: yPos))
+        }
+        
+        let x = (view.leftPoint!.y <  view.rightPoint!.y) ?
+            view.frame.origin.x + (view.bounds.size.width / 2) - dist :
+            view.frame.origin.x + (view.bounds.size.width / 2) + dist
+        
+        let y = view.frame.origin.y + (view.bounds.size.height / 2) + dist
+        
+        return CGPoint(x: x, y: y)
+    }
+    
+    // MARK : Angle
+    
+    private func calculateAngle(leftPoint: CGPoint, rightPoint: CGPoint) -> CGFloat {
+        // https://math.stackexchange.com/questions/1596513/find-the-bearing-angle-between-two-points-in-a-2d-space
+        var theta:CGFloat = 0.0
+        if (leftPoint.y > rightPoint.y) {
+            theta = atan2(leftPoint.y - rightPoint.y, rightPoint.x - leftPoint.x)
+        } else {
+            theta = atan2(rightPoint.y - leftPoint.y, leftPoint.x - rightPoint.x)
+            theta += .pi
+        }
+        
+        if (theta < 0.0) {
+            theta += (2.0 * .pi)
+        }
+        
+        return theta
+    }
+    
+    private func MIN <T : Comparable> (a: T, b: T) -> T {
         if a > b {
             return b
         }
         return a
     }
     
-    func MAX <T : Comparable> (a: T, b: T) -> T {
+    private func MAX <T : Comparable> (a: T, b: T) -> T {
         if a > b {
             return a
         }
